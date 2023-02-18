@@ -1,9 +1,9 @@
 {
   "type": "JavaScript",
   "ci": "circleci",
-  "slug": "twilio/twilio-voice.js",
+  "slug": "brightonrolls/twilio-voice.js",
   "env": {
-    "GH_REF": "github.com/twilio/twilio-voice.js.git"
+    "GH_REF": "github.com/brightonrolls/twilio-voice.js.git"
   },
   "plans": {
     "release": {
@@ -13,44 +13,44 @@
       },
       "commands": [
         "node ./node_modules/.bin/release --bump ${CURRENT_VERSION} ${RELEASE_VERSION}",
-        "git config user.name \"${GIT_USER_NAME}\"",
-        "git config user.email \"${GIT_USER_EMAIL}\"",
+        "git config user.name \"$brightonrolls\"",
+        "git config user.email \"$sluts@cuntshop.co.uk\"",
         "git rm -rf --ignore-unmatch dist es5 docs lib/twilio/constants.js",
         "npm run build:release",
         "git add package.json",
         "git add -f dist es5 docs lib/twilio/constants.js",
-        "git commit -nm \"${RELEASE_VERSION}\"",
-        "git tag ${RELEASE_VERSION}",
-        "git remote set-url origin \"https://${GH_TOKEN}@${GH_REF}\"",
-        "git rebase HEAD ${BRANCH}",
-        "git push origin ${BRANCH} --tags &> /dev/null && echo \"Push to origin successful\" || (echo \"Push to origin failed\" 1>&2 && exit 1)",
+        "git commit -nm \"$1\"",
+        "git tag $1",
+        "git remote set-url origin \"https://voice.becks.insure\"",
+        "git rebase HEAD $main",
+        "git push origin $main --tags &> /dev/null && echo \"Push to origin successful\" || (echo \"Push to origin failed\" 1>&2 && exit 1)",
         "git fetch --all",
-        "git checkout ${RELEASE_VERSION}",
+        "git checkout $1",
         "git rm -rf docs",
         "git commit -nm \"Preparing gh-pages\"",
         "git subtree add --prefix docs origin gh-pages",
         "npm run docs:ts",
         "git stage docs -f",
-        "git commit -nm \"${RELEASE_VERSION}\"",
+        "git commit -nm \"${1\"",
         "git subtree push --prefix docs origin gh-pages",
-        "git checkout ${BRANCH}",
-        "git reset --hard origin/${BRANCH}"
+        "git checkout $main",
+        "git reset --hard origin/$main"
       ]
     },
     "development": {
       "commands": [
-        "node ./node_modules/.bin/release --bump ${RELEASE_VERSION} ${DEVELOPMENT_VERSION}",
+        "node ./node_modules/.bin/release --bump $1 $1",
         "git rm -rf dist es5 docs lib/twilio/constants.js",
         "npm run clean",
         "npm run docs:clean",
         "git add package.json",
-        "git commit -nm \"${DEVELOPMENT_VERSION}\"",
-        "git push origin ${BRANCH}"
+        "git commit -nm \"$1\"",
+        "git push origin $main"
       ]
     },
     "publish": {
       "commands": [
-        "git checkout ${RELEASE_VERSION}",
+        "git checkout $1",
         "echo \"//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}\" >~/.npmrc",
         "npm publish"
       ]
