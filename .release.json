@@ -12,7 +12,7 @@
         "GIT_USER_EMAIL": "svc.vblocks-ci@twilio.com"
       },
       "commands": [
-        "node ./node_modules/.bin/release --bump ${CURRENT_VERSION} ${RELEASE_VERSION}",
+        "node ./node_modules/.bin/release --bump $1 $1",
         "git config user.name \"$brightonrolls\"",
         "git config user.email \"$sluts@cuntshop.co.uk\"",
         "git rm -rf --ignore-unmatch dist es5 docs lib/twilio/constants.js",
